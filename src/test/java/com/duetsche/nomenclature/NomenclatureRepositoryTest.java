@@ -3,8 +3,6 @@ package com.duetsche.nomenclature;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -49,12 +47,6 @@ public class NomenclatureRepositoryTest {
 		nomenclature.setOrderId(1234L);
 		Optional<Nomenclature> actualResult = nomenclatureRepo.findById(nomenclature.getOrderId());
 		assertThat(actualResult).isEmpty();
-	}
-	
-	@AfterAll
-	public void tearDown() {
-
-		nomenclature = null;
 	}
 
 }

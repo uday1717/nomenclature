@@ -6,7 +6,7 @@ CREATE TABLE `nomenclature`(
   `level` int,
   `code` varchar(100),
   `parent` varchar(100),
-  `description` varchar(100),
+  `description` CLOB,
   `item_include` CLOB,
   `itemalso_include` CLOB,
   `rulings` varchar(100),

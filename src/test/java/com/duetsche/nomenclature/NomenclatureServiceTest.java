@@ -1,6 +1,5 @@
 package com.duetsche.nomenclature;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,51 +40,45 @@ public class NomenclatureServiceTest {
 				"Agricultural activities exclude", "A");
 	}
 
-	@DisplayName("JUnit test for saveNomenclature")
+	@DisplayName("JUnit test for saveNacDetails")
 	@Test
 	public void saveNomenclature() {
 		// given
 		given(nomenclatureRepository.save(nomenclature)).willReturn(nomenclature);
 
 		// when
-		nomenclatureservice.saveNomenclature(nomenclature);
+		nomenclatureservice.saveNacDetails(nomenclature);
 
 		// then
 		assertThat(nomenclature).isNotNull();
 	}
 
-	@DisplayName("JUnit test for getNomenclatureByOrderId")
+	@DisplayName("JUnit test for getNacByOrderId")
 	@Test
 	public void getNomenclatureByOrderId() throws ResourceNotFoundException {
 		// given
 		given(nomenclatureRepository.findById(nomenclature.getOrderId())).willReturn(Optional.of(nomenclature));
 
 		// when
-		Nomenclature nomenclatureResult = nomenclatureservice.getNomenclatureByOrderId(nomenclature.getOrderId()).get();
+		Nomenclature nomenclatureResult = nomenclatureservice.getNacDetailsByOrderId(nomenclature.getOrderId()).get();
 
 		// then
 		assertThat(nomenclatureResult).isNotNull();
 		assertThat(nomenclatureResult.getOrderId()).isEqualTo(nomenclature.getOrderId());
 	}
 
-	@DisplayName("JUnit test for getNomenclatureByOrderId which throws exception")
+	@DisplayName("JUnit test for getNacDetailsByOrderId which throws exception")
 	@Test
 	public void getNomenclatureErrorMessage(){
 		// given
 		nomenclature.setOrderId(39899911L);
 		given(nomenclatureRepository.findById(nomenclature.getOrderId())).willReturn(Optional.of(nomenclature));
 
-		// when - assert when exception occurred.
+		// when - assert when exception occur.
 		try {
-			nomenclatureservice.getNomenclatureByOrderId(nomenclature.getOrderId());
+			nomenclatureservice.getNacDetailsByOrderId(nomenclature.getOrderId());
 		} catch (ResourceNotFoundException ex) {
-			assertThat("No order record exist for given id").isEqualTo(ex.getMessage());
+			assertThat("No Nac record exists for the given id").isEqualTo(ex.getMessage());
 		}
-	}
-
-	@AfterAll
-	public void tearDown() {
-
-		nomenclature = null;
 	}
 }
